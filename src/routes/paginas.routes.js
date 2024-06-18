@@ -11,7 +11,6 @@ import {
 
 const router = Router();
 
-
 router.get("/", renderIndex);
 router.get("/gallery", renderGaleria);
 router.get("/about", renderAcerca);
