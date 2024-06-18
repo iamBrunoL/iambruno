@@ -31,20 +31,40 @@ export const renderProximamente = async (req, res) => {
 };
 
 export const createComentario = async (req, res) => {
+  // Obtener información del navegador desde el encabezado user-agent
+  const navegador = req.headers["user-agent"];
+  // Extraer el sistema operativo y la versión del agente de usuario
+  const sistemaOperativo = navegador.match(/\(([^)]+)\)/)[1];
+  // Obtener el tipo de dispositivo desde el agente de usuario
+  const tipoDispositivo = navegador.includes("Mobile") ? "Móvil" : "Escritorio";
+
+  // Obtener la IP del usuario
+  const ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
+
   try {
     const { name, email, message } = req.body;
 
     console.log("Datos recibidos:", { name, email, message });
 
-    // Insert the comment into the database
-    const result = await pool.query('INSERT INTO comentarios (name, email, message) VALUES (?, ?, ?)', [name, email, message]);
+    // Insertar el comentario en la base de datos
+    const result = await pool.query(
+      "INSERT INTO comentarios (name, email, message) VALUES (?, ?, ?)",
+      [name, email, message]
+    );
 
-    //console.log("Resultado de la inserción:", result);
+    // Registro de log
+    const nombreHost = req.headers.host;
+    const crearLog = `Registro de comentario a las ${new Date().toLocaleString()} - IP: ${ip} - Nombre de host: ${nombreHost} - Navegador: ${navegador} - Sistema Operativo: ${sistemaOperativo} - Tipo de Dispositivo: ${tipoDispositivo}`;
+    await pool.query("INSERT INTO reportes (contenido) VALUES (?)", [crearLog]);
 
-    // Send a success response
-    res.status(200).json({ success: true, message: "Comentario registrado correctamente." });
+    // Enviar una respuesta exitosa
+    res
+      .status(200)
+      .json({ success: true, message: "Comentario registrado correctamente." });
   } catch (error) {
     console.error("Error al registrar el comentario:", error);
-    res.status(500).json({ success: false, message: "Error al registrar el comentario." });
+    res
+      .status(500)
+      .json({ success: false, message: "Error al registrar el comentario." });
   }
 };
