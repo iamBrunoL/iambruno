@@ -35,6 +35,12 @@ export const renderMusica = async (req, res) => {
   res.render("music", { titulo: titulo });
 };
 
+export const renderTerminos = async (req, res) => {
+  const titulo = "Términos y Condiciones";
+  res.render("termines", { titulo: titulo });
+};
+
+
 export const createComentario = async (req, res) => {
   // Obtener información del navegador desde el encabezado user-agent
   const navegador = req.headers["user-agent"];

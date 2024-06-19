@@ -8,6 +8,7 @@ import {
   renderVideogames,
   createComentario,
   renderMusica,
+  renderTerminos,
 } from "../controllers/paginasController.js";
 
 const router = Router();
@@ -19,6 +20,7 @@ router.get("/videogames", renderVideogames);
 router.get("/comentarios", renderComentarios);
 router.get("/comingsoon", renderProximamente);
 router.get("/music", renderMusica);
+router.get("/termines", renderTerminos);
 router.post("/addComentario", createComentario);
 
 export default router;
