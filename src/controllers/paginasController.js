@@ -30,6 +30,11 @@ export const renderProximamente = async (req, res) => {
   res.render("comingsoon", { titulo: titulo });
 };
 
+export const renderMusica = async (req, res) => {
+  const titulo = "Música";
+  res.render("music", { titulo: titulo });
+};
+
 export const createComentario = async (req, res) => {
   // Obtener información del navegador desde el encabezado user-agent
   const navegador = req.headers["user-agent"];
