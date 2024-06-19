@@ -44,14 +44,15 @@
 
       <nav id="navbar" class="navbar">
         <ul>
-          <li><a href="/">Inicio</a></li>
-          <li><a href="about">Acerca de</a></li>
-          <li><a href="comentarios">Comentarios</a></li>
-          <li><a href="gallery">Galería</a></li>
-          <li><a href="videogames">Videojuegos</a></li>
-          <li><a href="music">Música</a></li>
+          <li class="<%= titulo === 'I am Bruno' ? 'active' : '' %>"><a href="/">Inicio</a></li>
+          <li class="<%= titulo === 'Acerca de' ? 'active' : '' %>"><a href="about">Acerca de</a></li>
+          <li class="<%= titulo === 'Comentarios' ? 'active' : '' %>"><a href="comentarios">Comentarios</a></li>
+          <li class="<%= titulo === 'Galería de imágenes' ? 'active' : '' %>"><a href="gallery">Galería</a></li>
+          <li class="<%= titulo === 'Videojuegos' ? 'active' : '' %>"><a href="videogames">Videojuegos</a></li>
+          <li class="<%= titulo === 'Música' ? 'active' : '' %>"><a href="music">Música</a></li>
         </ul>
       </nav><!-- .navbar -->
+      
 
       <div class="header-social-links">
         <a href="https://open.spotify.com/playlist/4uZc1PXzFEljKIxLQcts8h" class="spotify"><i class="bi bi-spotify"></i></a>
